@@ -7,9 +7,11 @@ import lombok.Setter;
 @Setter
 public class Movie {
 
+    private long id;
     private String title;
     private String director;
     private String posterURL;
-    private String year;
+    private Integer year;
+
 
 }
