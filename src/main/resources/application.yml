@@ -1,0 +1,13 @@
+server:
+    port: 8080
+    host: localhost
+spring:
+    datasource:
+         url: jdbc:mysql://localhost:3306/movie-store?useSSL=false
+         username: root
+         password: abuayyub2018
+    jpa:
+       hibernate:
+               ddl-auto: create
+       database-platform: org.hibernate.dialect.PostgreSQLDialect
+       show: true
