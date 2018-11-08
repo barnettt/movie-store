@@ -19,6 +19,7 @@ public class MovieDetail {
     private String posterURL;
     private Integer year;
     private String movieId;
+    private String api;
 
     public MovieDetail() {
         //default constructor
@@ -77,5 +78,13 @@ public class MovieDetail {
 
     public void setMovieId(final String movieId) {
         this.movieId = movieId;
+    }
+
+    public String getApi() {
+        return api;
+    }
+
+    public void setApi(final String api) {
+        this.api = api;
     }
 }

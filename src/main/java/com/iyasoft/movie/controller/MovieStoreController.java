@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MovieStoreContoller {
+public class MovieStoreController {
 
     @Autowired
     private MovieStoreService movieStoreService;
 
     private Predicate<String> servicePredicate = service -> !"odm".equalsIgnoreCase(service) && !"dbm".equalsIgnoreCase(service);
+    private Predicate<List<MovieDetail>> checkDetails = details -> details.isEmpty() || details.get(0).getTitle() == null;
 
     @GetMapping("/api/movies/{title}")
     public ResponseEntity getMoviesByTitle(@PathVariable("title") String title, @RequestParam("api") String api) {//@RequestParam("title") String title, @PathVariable("api") String api
@@ -26,9 +27,17 @@ public class MovieStoreContoller {
             return ResponseEntity.badRequest().build();
         }
 
-        List<MovieDetail> result = movieStoreService.getMoviesDetailFromExternalService(title, api);
-        movieStoreService.cacheMovie(result);
+        List<MovieDetail> result = findTitleInMovieCache(title, api);
+        if(checkDetails.test(result)) {
+            result = movieStoreService.getMoviesDetailFromExternalService(title, api);
+            movieStoreService.cacheMovie(result);
+        }
         return ResponseEntity.ok(result);
+
+    }
+
+    private List<MovieDetail> findTitleInMovieCache(String title, String api) {
+        return movieStoreService.retrieveMovieFromCache(title,api);
     }
 
 }

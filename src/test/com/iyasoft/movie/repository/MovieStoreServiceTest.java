@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,6 +32,8 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { ApplicationTestConfig.class, Application.class})
 @ComponentScan(basePackages = {"com.iyaasoft.movie.*"})
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 public class MovieStoreServiceTest {
 
@@ -62,7 +65,7 @@ public class MovieStoreServiceTest {
         movies.add(movie);
         when(movieDetailRepository.findByTitle(anyString())).thenReturn(movies);
 
-        List<MovieDetail> response = movieStore.retrieveMovieFromCache("Incredibles");
+        List<MovieDetail> response = movieStore.retrieveMovieFromCache("Incredibles", "odm");
         assertThat(response, notNullValue());
         assertThat(response.get(0).getTitle(), is("Incredibles"));
     }

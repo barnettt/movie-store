@@ -1,7 +1,6 @@
 package com.iyasoft.movie.controller;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.IsNull.notNullValue;
@@ -10,18 +9,15 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.Application;
 import com.iyasoft.movie.entity.MovieDetail;
 import com.iyasoft.movie.service.MovieStoreService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -32,7 +28,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
-@WebMvcTest(MovieStoreContoller.class)
+@WebMvcTest(MovieStoreController.class)
 public class MovieControllerTest {
 
     @Autowired
@@ -64,7 +60,11 @@ public class MovieControllerTest {
         details.add(detail);
         when(movieStoreService.getMoviesDetailFromExternalService(anyString(),anyString())).thenReturn(details);
 
-        return mvc.perform(get("/api/movies/Incredibles?api="+api)
+        return doMvcCall("incredible game",api);
+    }
+
+    private  MvcResult doMvcCall(String title, String api) throws Exception {
+        return  mvc.perform(get(String.format("/api/movies/%s?api=%s",title,api))
                 .header("Origin", "localhost")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8"))

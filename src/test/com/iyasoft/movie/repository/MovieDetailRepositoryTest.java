@@ -45,6 +45,8 @@ public class MovieDetailRepositoryTest {
         movie1 = new MovieDetail("Incredible Game", "John Doe", "http://someurl/image", 2004);
         MovieDetail movie2 = new MovieDetail("Impossible Journey", "John Doe", "http://someurl/image", 2004);
         MovieDetail movie3 = new MovieDetail("Incredibles 2", "James Brown", "http://someurl/image", 2004);
+        movie3.setApi("odm");
+        movie2.setApi("dbm");
         entityManager.persist(movie1);
         entityManager.persist(movie2);
         entityManager.persist(movie3);
@@ -79,5 +81,20 @@ public class MovieDetailRepositoryTest {
         List<MovieDetail> result = movieDetailRepository.findByDirector("James Brown");
         assertThat(result,hasSize(1));
         assertThat(result.get(0).getDirector(),is("James Brown"));
+    }
+
+    @Test
+    public void findByTitleAndApiOdm() {
+        List<MovieDetail> result = movieDetailRepository.findByTitleAndApi("Incredibles 2", "odm");
+        assertThat(result, hasSize(1));
+        assertThat(result.get(0).getTitle(), is("Incredibles 2"));
+    }
+
+
+    @Test
+    public void findByTitleAndApiDbm() {
+        List<MovieDetail> result = movieDetailRepository.findByTitleAndApi("Impossible Journey", "dbm");
+        assertThat(result, hasSize(1));
+        assertThat(result.get(0).getTitle(), is("Impossible Journey"));
     }
 }

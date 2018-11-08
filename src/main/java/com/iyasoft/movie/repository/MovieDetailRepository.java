@@ -18,4 +18,5 @@ public interface MovieDetailRepository extends CrudRepository<MovieDetail, Long>
 
     List<MovieDetail> findByDirector(String director);
 
+    List<MovieDetail> findByTitleAndApi(String title, String api);
 }

@@ -74,7 +74,7 @@ public class MovieStoreService {
         return movieDirectorService.getMovieDirectorDetails(detail);
     }
 
-    public List<MovieDetail> retrieveMovieFromCache(final String title) {
-        return movieDetailRepository.findByTitle(title);
+    public List<MovieDetail> retrieveMovieFromCache(final String title, String api) {
+        return movieDetailRepository.findByTitleAndApi(title, api);
     }
 }

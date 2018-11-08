@@ -34,7 +34,6 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootTest(classes = {ApplicationTestConfig.class, Application.class})
 @ComponentScan(basePackages = {"com.iyaasoft.movie.*"})
 @ActiveProfiles("test")
-//@RestClientTest(OdmMovieService.class)
 public class MovieStoreServiceTest2 extends AbstractTestMovieService {
 
     @Autowired
