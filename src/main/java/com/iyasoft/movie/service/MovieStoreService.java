@@ -2,6 +2,7 @@ package com.iyasoft.movie.service;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -41,10 +42,12 @@ public class MovieStoreService {
 
     private Predicate<List> moviePredicate = movie -> movie == null || movie.isEmpty();
 
-    public MovieDetail cacheMovie(final MovieDetail movie) {
-
-        return movieDetailRepository.save(movie);
+    public List<MovieDetail>  cacheMovie(final List<MovieDetail> movies) {
+        List<MovieDetail> results = new ArrayList<>();
+        movies.forEach(movie -> results.add(movieDetailRepository.save(movie)));
+        return results;
     }
+
 
     public List<MovieDetail> getMoviesByTitle(final String title) {
 
@@ -71,4 +74,7 @@ public class MovieStoreService {
         return movieDirectorService.getMovieDirectorDetails(detail);
     }
 
+    public List<MovieDetail> retrieveMovieFromCache(final String title) {
+        return movieDetailRepository.findByTitle(title);
+    }
 }

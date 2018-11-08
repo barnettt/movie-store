@@ -27,6 +27,7 @@ public class MovieStoreContoller {
         }
 
         List<MovieDetail> result = movieStoreService.getMoviesDetailFromExternalService(title, api);
+        movieStoreService.cacheMovie(result);
         return ResponseEntity.ok(result);
     }
 

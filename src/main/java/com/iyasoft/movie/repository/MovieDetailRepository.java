@@ -17,4 +17,5 @@ public interface MovieDetailRepository extends CrudRepository<MovieDetail, Long>
     List<MovieDetail> findByMatchCriteriaStartsWith(String title);
 
     List<MovieDetail> findByDirector(String director);
+
 }

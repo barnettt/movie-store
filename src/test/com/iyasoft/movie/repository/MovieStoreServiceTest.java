@@ -43,16 +43,29 @@ public class MovieStoreServiceTest {
     @Test
     public void shouldStoreMovieDetailInDbCache() {
 
-        MovieDetail movie = new MovieDetail("Incredibles", "John Doe", "http://someurl/image",2004);
+        MovieDetail movie = new MovieDetail("Incredibles", "John Doe", "http://someurl/image", 2004);
         movie.setId(1234l);
         when(movieDetailRepository.save(any(MovieDetail.class))).thenReturn(movie);
-
-        MovieDetail response  = movieStore.cacheMovie(movie);
+        List<MovieDetail> movies = new ArrayList<>();
+        movies.add(movie);
+        List<MovieDetail> response = movieStore.cacheMovie(movies);
         assertThat(response, notNullValue());
-        assertThat(response.getId(), notNullValue());
+        assertThat(response.get(0).getId(), notNullValue());
 
     }
 
+    @Test
+    public void shouldRetrieveMovieFromCache() {
+        MovieDetail movie = new MovieDetail("Incredibles", "John Doe", "http://someurl/image", 2004);
+        movie.setId(1234l);
+        List<MovieDetail> movies = new ArrayList<>();
+        movies.add(movie);
+        when(movieDetailRepository.findByTitle(anyString())).thenReturn(movies);
+
+        List<MovieDetail> response = movieStore.retrieveMovieFromCache("Incredibles");
+        assertThat(response, notNullValue());
+        assertThat(response.get(0).getTitle(), is("Incredibles"));
+    }
     @Test
     public void shouldFindMovieInDbCacheByTitle() {
         List<MovieDetail> movies = new ArrayList<>();
