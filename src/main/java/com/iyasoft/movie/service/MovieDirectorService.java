@@ -34,7 +34,6 @@ public class MovieDirectorService {
 
     }
 
-
     public List<MovieDetail> getMovieDirectorDetails(MovieDetail detail) {
         List<MovieDetail> details = new ArrayList();
         String url = String.format(mdbDirectorServiceURL, detail.getMovieId());

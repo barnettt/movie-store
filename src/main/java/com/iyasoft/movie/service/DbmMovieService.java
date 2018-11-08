@@ -1,12 +1,8 @@
 package com.iyasoft.movie.service;
 
-import static java.util.stream.Collectors.toList;
-import static org.springframework.data.util.Pair.toMap;
-
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -14,18 +10,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iyasoft.movie.entity.MovieDetail;
 import com.iyasoft.movie.exception.MovieStoreUnparsableResponse;
 import com.iyasoft.movie.exception.URIEncodingException;
-import com.iyasoft.movie.model.DbmMovieCastModel;
-import com.iyasoft.movie.model.DbmMovieModel;
-import com.iyasoft.movie.model.MovieModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -80,7 +71,6 @@ public class DbmMovieService extends AbstractMovieStoreService {
         List<MovieDetail> detail = getMovieDetailFromResponse(response.get("results"), title);
         return detail;
     }
-
 
     private String doEncoding(final String title) {
         try {

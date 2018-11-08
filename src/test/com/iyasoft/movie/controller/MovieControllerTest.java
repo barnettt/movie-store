@@ -3,7 +3,6 @@ package com.iyasoft.movie.controller;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.core.IsNull.notNullValue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -55,16 +54,16 @@ public class MovieControllerTest {
     }
 
     private MvcResult doMvcTestAndGetResult(String api) throws Exception {
-        MovieDetail detail =  new MovieDetail();
+        MovieDetail detail = new MovieDetail();
         List<MovieDetail> details = new ArrayList<>();
         details.add(detail);
-        when(movieStoreService.getMoviesDetailFromExternalService(anyString(),anyString())).thenReturn(details);
+        when(movieStoreService.getMoviesDetailFromExternalService(anyString(), anyString())).thenReturn(details);
 
-        return doMvcCall("incredible game",api);
+        return doMvcCall("incredible game", api);
     }
 
-    private  MvcResult doMvcCall(String title, String api) throws Exception {
-        return  mvc.perform(get(String.format("/api/movies/%s?api=%s",title,api))
+    private MvcResult doMvcCall(String title, String api) throws Exception {
+        return mvc.perform(get(String.format("/api/movies/%s?api=%s", title, api))
                 .header("Origin", "localhost")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("utf-8"))

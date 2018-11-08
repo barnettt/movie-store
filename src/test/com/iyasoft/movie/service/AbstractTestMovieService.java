@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public abstract class AbstractTestMovieService {
 
-    public String getJsonPayloadFromFile(String fileName){
+    public String getJsonPayloadFromFile(String fileName) {
         StringBuilder result = new StringBuilder("");
 
         //Get file from resources folder

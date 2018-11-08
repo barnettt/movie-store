@@ -68,19 +68,19 @@ public class MovieDetailRepositoryTest {
     }
 
     @Test
-    public void canFindWithMatchCriteria( ) {
+    public void canFindWithMatchCriteria() {
 
         List<MovieDetail> result = movieDetailRepository.findByMatchCriteriaStartsWith("Incredible");
         assertThat(result, hasSize(2));
-        result.forEach(movie -> assertThat(movie.getTitle(), containsString("Incredible"))) ;
+        result.forEach(movie -> assertThat(movie.getTitle(), containsString("Incredible")));
     }
 
     @Test
     public void canFindByDirector() {
 
         List<MovieDetail> result = movieDetailRepository.findByDirector("James Brown");
-        assertThat(result,hasSize(1));
-        assertThat(result.get(0).getDirector(),is("James Brown"));
+        assertThat(result, hasSize(1));
+        assertThat(result.get(0).getDirector(), is("James Brown"));
     }
 
     @Test

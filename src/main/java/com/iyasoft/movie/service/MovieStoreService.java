@@ -1,25 +1,14 @@
 package com.iyasoft.movie.service;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iyasoft.movie.entity.MovieDetail;
 import com.iyasoft.movie.exception.MovieNotFoundException;
-import com.iyasoft.movie.exception.URIEncodingException;
-import com.iyasoft.movie.model.DbmMovieCastModel;
-import com.iyasoft.movie.model.DbmMovieModel;
 import com.iyasoft.movie.repository.MovieDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 @Component
 public class MovieStoreService {
@@ -42,7 +31,7 @@ public class MovieStoreService {
 
     private Predicate<List> moviePredicate = movie -> movie == null || movie.isEmpty();
 
-    public List<MovieDetail>  cacheMovie(final List<MovieDetail> movies) {
+    public List<MovieDetail> cacheMovie(final List<MovieDetail> movies) {
         List<MovieDetail> results = new ArrayList<>();
         movies.forEach(movie -> results.add(movieDetailRepository.save(movie)));
         return results;

@@ -4,8 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsNull.notNullValue;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +17,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -35,7 +32,7 @@ public class OdmMovieServiceTest extends AbstractTestMovieService {
 
     @Test
     public void shouldParseResponseFromOdm() throws Exception {
-        JSONObject data  = new JSONObject(getJsonPayloadFromFile("odm-movie-data.json"));
+        JSONObject data = new JSONObject(getJsonPayloadFromFile("odm-movie-data.json"));
         String modelData = data.toString();
         ObjectMapper mapper = new ObjectMapper();
         Map asList = mapper.readValue(modelData, Map.class);
@@ -44,9 +41,9 @@ public class OdmMovieServiceTest extends AbstractTestMovieService {
         assertThat(details, hasSize(1));
     }
 
-    @Test(expected=MovieStoreUnparsableResponse.class)
+    @Test(expected = MovieStoreUnparsableResponse.class)
     public void shouldThrowException() throws Exception {
-        JSONObject data  = new JSONObject(getJsonPayloadFromFile("odm-movie-missing-element.json"));
+        JSONObject data = new JSONObject(getJsonPayloadFromFile("odm-movie-missing-element.json"));
         String modelData = data.toString();
         ObjectMapper mapper = new ObjectMapper();
         Map asMap = mapper.readValue(modelData, Map.class);

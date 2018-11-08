@@ -47,7 +47,6 @@ public class MovieStoreServiceTest2 extends AbstractTestMovieService {
 
     private String castURL = "https://api.themoviedb.org/3/movie/335983/credits?api_key=40c006b76d21666cdbe6bef858be16ce";
 
-
     @Autowired
     private MovieStoreService movieStoreService;
 

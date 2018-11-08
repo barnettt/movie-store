@@ -28,7 +28,7 @@ public class MovieStoreController {
         }
 
         List<MovieDetail> result = findTitleInMovieCache(title, api);
-        if(checkDetails.test(result)) {
+        if (checkDetails.test(result)) {
             result = movieStoreService.getMoviesDetailFromExternalService(title, api);
             movieStoreService.cacheMovie(result);
         }
@@ -37,7 +37,7 @@ public class MovieStoreController {
     }
 
     private List<MovieDetail> findTitleInMovieCache(String title, String api) {
-        return movieStoreService.retrieveMovieFromCache(title,api);
+        return movieStoreService.retrieveMovieFromCache(title, api);
     }
 
 }
