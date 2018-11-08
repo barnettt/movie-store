@@ -17,6 +17,10 @@ spring:
          password: sa
     jpa:
       database-platform: org.hibernate.dialect.H2Dialect
+movieapi:
+    odm: http://www.omdbapi.com/?apikey=a93622a2&t=
+    mdb: https://api.themoviedb.org/3/search/movie?api_key=40c006b76d21666cdbe6bef858be16ce&language=en-US&query=
+    mdb–dir: https://api.themoviedb.org/3/movie/%s/credits?api_key=40c006b76d21666cdbe6bef858be16ce
 
 #      ### Enable H2 Console Access
 #      spring.h2.console.enabled=true

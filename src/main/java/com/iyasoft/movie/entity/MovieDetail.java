@@ -1,20 +1,28 @@
 package com.iyasoft.movie.entity;
 
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+
 @Entity
 public class MovieDetail {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String director;
     private String posterURL;
     private Integer year;
+    private String movieId;
+
+    public MovieDetail() {
+        //default constructor
+    }
 
     public MovieDetail(final String title, final String director, final String url, final int year) {
         this.title = title;
@@ -61,5 +69,13 @@ public class MovieDetail {
 
     public void setYear(final Integer year) {
         this.year = year;
+    }
+
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(final String movieId) {
+        this.movieId = movieId;
     }
 }

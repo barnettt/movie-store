@@ -3,11 +3,16 @@ server:
     host: localhost
 spring:
     datasource:
-         url: jdbc:mysql://localhost:3306/movie-store?useSSL=false
+         url: jdbc:mysql://localhost:3306/movie_store?useSSL=false&allowPublicKeyRetrieval=true
          username: root
          password: abuayyub2018
     jpa:
        hibernate:
                ddl-auto: create
-       database-platform: org.hibernate.dialect.PostgreSQLDialect
+       database-platform: org.hibernate.dialect.MySQL5Dialect
        show: true
+# hard coded these api keys for now but can be abstracted to accommodate key changes
+movieapi:
+    odm: http://www.omdbapi.com/?apikey=a93622a2&t=
+    mdb: https://api.themoviedb.org/3/search/movie?api_key=40c006b76d21666cdbe6bef858be16ce&language=en-US&query=
+    mdb–dir: https://api.themoviedb.org/3/movie/%s/credits?api_key=40c006b76d21666cdbe6bef858be16ce

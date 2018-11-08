@@ -1,4 +1,4 @@
-package com.iyasoft.movie;
+package com.iyasoft.movie.model;
 
 import lombok.Getter;
 import lombok.Setter;
