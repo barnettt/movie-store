@@ -67,7 +67,7 @@ public class DbmMovieService extends AbstractMovieStoreService {
 
     public List<MovieDetail> getInvokeUrlForMovieDetails(String title) {
         String url = mdbServiceURL + doEncoding(title);
-        HashMap response = (HashMap) invokeServiceFunction(restTemplate, url, Map.class);
+        HashMap response = (HashMap) movieService.invokeOnService(restTemplate, url, Map.class);
         List<MovieDetail> detail = getMovieDetailFromResponse(response.get("results"), title);
         return detail;
     }

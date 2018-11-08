@@ -58,10 +58,11 @@ public class MovieStoreServiceTest {
     public void shouldRetrieveMovieFromCache() {
         MovieDetail movie = new MovieDetail("Incredibles", "John Doe", "http://someurl/image", 2004);
         movie.setId(1234l);
+        movie.setApi("dbm");
         List<MovieDetail> movies = new ArrayList<>();
         movies.add(movie);
-        when(movieDetailRepository.findByTitle(anyString())).thenReturn(movies);
 
+        when(movieDetailRepository.findByTitleAndApi(anyString(), anyString())).thenReturn(movies);
         List<MovieDetail> response = movieStore.retrieveMovieFromCache("Incredibles", "odm");
         assertThat(response, notNullValue());
         assertThat(response.get(0).getTitle(), is("Incredibles"));
@@ -80,19 +81,21 @@ public class MovieStoreServiceTest {
 
         when(movieDetailRepository.findByTitle(anyString())).thenReturn(movies);
         List<MovieDetail> result = movieStore.getMoviesByTitle("Incredibles 2");
+        assertThat(result.get(1).getId(),notNullValue());
+        assertThat(result.get(1).getTitle(),is("Incredibles 2"));
 
     }
 
     @Test(expected = MovieNotFoundException.class)
     public void shouldThrowMovieNotFoundException() {
         when(movieDetailRepository.findByTitle(anyString())).thenReturn(new ArrayList());
-        List<MovieDetail> result = movieStore.getMoviesByTitle("Don't Bother me");
+        movieStore.getMoviesByTitle("Don't Bother me");
     }
 
     @Test(expected = MovieNotFoundException.class)
     public void shouldThrowMovieNotFoundException_forNullResult() {
         when(movieDetailRepository.findByTitle(anyString())).thenReturn(null);
-        List<MovieDetail> result = movieStore.getMoviesByTitle("Don't Bother me");
+        movieStore.getMoviesByTitle("Don't Bother me");
     }
 
 

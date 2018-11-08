@@ -49,7 +49,7 @@ public class OdmMovieService extends AbstractMovieStoreService {
 
     public List<MovieDetail> invokeUrlForOdmService(String title) {
         String url = odmServiceURL + title;
-        Map<String, Object> response = (HashMap) invokeServiceFunction(restTemplate, url, Map.class);
+        Map<String, Object> response = (HashMap) movieService.invokeOnService(restTemplate, url, Map.class);
         return getMovieDetailFromResponse(response);
     }
 

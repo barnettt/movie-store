@@ -3,6 +3,7 @@ package com.iyasoft.movie.service;
 import java.util.List;
 
 import com.iyasoft.movie.entity.MovieDetail;
+import com.iyasoft.movie.function.InvokeServiceFunction;
 import org.springframework.web.client.RestTemplate;
 
 public abstract class AbstractMovieStoreService {
@@ -11,9 +12,7 @@ public abstract class AbstractMovieStoreService {
 
     public abstract List<MovieDetail> getMovieDetailFromResponse(final Object model);
 
-    public Object invokeServiceFunction(RestTemplate template, String url, Class clazz) {
+    public InvokeServiceFunction<RestTemplate, String, Class, Object> movieService =  (template, url, clazz) ->   template.getForObject(url, clazz);
 
-        return template.getForObject(url, clazz);
-    }
 
 }
